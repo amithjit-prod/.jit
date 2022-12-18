@@ -15,13 +15,6 @@ applications:
   exclude_paths: []
   target_url: https://platform.staging.jit.io/
   type: web
-aws:
-- account_id: '954435684707'
-  account_name: NewAccount
-  deploy_region: us-east-1
-  regions:
-  - us-east-1
-  type: account
 deployment:
   environments:
   - staging
