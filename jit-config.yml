@@ -1,0 +1,8 @@
+applications:
+- api_domain: https://platform.staging.jit.io/
+  application_name: zap-stg-api
+  authentication_mode: non-authenticated
+  exclude_paths:
+  - '*logout*'
+  target_url: https://meshi-bucket.s3.amazonaws.com/openapi.json
+  type: api
