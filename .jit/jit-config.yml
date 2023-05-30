@@ -1,10 +1,10 @@
 applications:
 - api_domain: api.staging.jit.io
   application_name: aaa
+  auth_header_name: sads
   authentication_key: Authorization
   authentication_mode: header-bearer
   authentication_value: ${{ jit_secrets.api_scan_authentication_value }}
-  auth_header_name: "sads"
   exclude_paths: []
   target_url: https://meshi-bucket.s3.amazonaws.com/openapi.json
   type: api
@@ -13,3 +13,7 @@ aws:
   regions:
   - us-east-1
   type: account
+github_branch_protection:
+  organization:
+    amount_of_required_reviews: 2
+    required_status_checks: []
