@@ -8,11 +8,6 @@ applications:
   exclude_paths: []
   target_url: https://meshi-bucket.s3.amazonaws.com/openapi.json
   type: api
-aws:
-- account_id: '748560276420'
-  regions:
-  - us-east-1
-  type: account
 github_branch_protection:
   organization:
     amount_of_required_reviews: 2
