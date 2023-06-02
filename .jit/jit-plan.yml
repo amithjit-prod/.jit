@@ -49,10 +49,12 @@ items:
       jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
 override:
   workflows:
-    runtime-misconfig-detection:
+    runtime-misconfiguration-detection:
+      default-jobs: disabled
       jobs:
         runtime-misconfig-detection-aws:
+          enabled: true
           steps:
-            - name: Scan infrastructure for runtime misconfigurations (AWS)
+            - name: Run Prowler For AWS
               uses: >-
-                ghcr.io/jitsecurity-controls/control-prowler-alpine:not-hardened-no-dups
+                121169888995.dkr.ecr.us-east-1.amazonaws.com/prowler:not-hardened-no-dups
