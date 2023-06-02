@@ -44,9 +44,6 @@ items:
       jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
   - name: Scan code for hard-coded secrets
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
-  - name: Scan infrastructure for runtime misconfigurations
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
 
 override:
   workflows:
@@ -54,6 +51,5 @@ override:
       jobs:
         runtime-misconfig-detection-aws:
           steps:
-            - name: Scan infrastructure for runtime misconfigurations (AWS)
-              uses: >-
-                ghcr.io/jitsecurity-controls/control-prowler-alpine:not-hardened-no-dups
+          - name: Scan infrastructure for runtime misconfigurations (AWS)
+            uses: ghcr.io/jitsecurity-controls/control-prowler-alpine:not-hardened-no-dups
