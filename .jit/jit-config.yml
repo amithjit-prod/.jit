@@ -12,10 +12,4 @@ github_branch_protection:
   organization:
     amount_of_required_reviews: 2
     required_status_checks: []
-resource_management:
-  exclude:
-    plan_items:
-      item-secret-detection:
-        resources:
-          - name: test-prod
-            type: repo
+
