@@ -46,6 +46,14 @@ items:
       jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
 override:
   workflows:
+    sast:
+      jobs:
+        static-code-analysis-python-semgrep:
+          steps:
+            - name: Run semgrep python
+              uses: registry.jit.io/control-semgrep-alpine:latest
+              with:
+                args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR --exclude-rule python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query \${WORK_DIR:-.}
     runtime-misconfiguration-detection:
       default-jobs: disabled
       jobs:
