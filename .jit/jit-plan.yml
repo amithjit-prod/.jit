@@ -51,5 +51,6 @@ override:
           enabled: true
           steps:
             - name: Run Prowler For AWS
-              uses: >-
-                121169888995.dkr.ecr.us-east-1.amazonaws.com/prowler:not-hardened-no-dups
+              uses: 899025839375.dkr.ecr.us-east-1.amazonaws.com/prowler:sc-18604-prowler-add-support-of-specific-checks-fix
+              args: --excluded-checks iam_password_policy_expires_passwords_within_90_days_or_less
+                
