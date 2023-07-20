@@ -39,9 +39,6 @@ items:
   - name: Scan infrastructure for runtime misconfigurations (GCP)
     uses: >-
       jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
-  - name: Scan infrastructure for runtime misconfigurations
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
 override:
   workflows:
     runtime-misconfiguration-detection:
@@ -51,8 +48,7 @@ override:
           enabled: true
           steps:
             - name: Run Prowler For AWS
-              uses: >-
-                registry.jit.io/prowler:latest
+              uses: registry.jit.io/prowler:latest
               with:
                 args: >-
                   --excluded-checks
