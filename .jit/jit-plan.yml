@@ -45,6 +45,9 @@ items:
   - name: Detect GitHub misconfigurations
     uses: >-
       jitsecurity-controls/jit-plans/items/third_party_app/item-github-misconfiguration.yml@latest
+  - name: Import AWS Security Hub Findings
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-cloud-security-posture-management.yml@latest
 override:
   workflows:
     runtime-misconfiguration-detection:
