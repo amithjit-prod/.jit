@@ -49,3 +49,13 @@ override:
             uses: registry.jit.io/prowler:not-hardened-prowler-exclude-tests2
             with:
               args: --excluded-checks awslambda_function_no_secrets_in_code
+    runtime-misconfiguration-detection-azure:
+      jobs:
+        runtime-misconfig-detection-azure:
+          runner:
+            setup:
+              checkout: false
+            type: github_actions
+          steps:
+            - name: Run Prowler For Azure
+              uses: registry.jit.io/prowler:latest
