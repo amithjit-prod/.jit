@@ -49,16 +49,6 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
-    runtime-misconfiguration-detection:
-      default-jobs: disabled
-      jobs:
-        runtime-misconfig-detection-aws:
-          enabled: true
-          steps:
-            - name: Run Prowler For AWS
-              uses: registry.jit.io/prowler:not-hardened-prowler-exclude-tests2
-              with:
-                args: '--excluded-checks awslambda_function_no_secrets_in_code'
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
