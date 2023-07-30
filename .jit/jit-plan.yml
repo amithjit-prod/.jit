@@ -39,62 +39,6 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
-    docker-scan:
-      jobs:
-        docker-scan:
-          steps:
-          - name: Run trivy
-            with:
-              args: --quiet config --severity HIGH,CRITICAL -f json --ignorefile /opt/.trivyignore
-                ${WORK_DIR:-.}
-    enrichment-code:
-      jobs:
-        enrich:
-          steps:
-          - name: Run code enrichment
-            uses: registry.jit.io/control-enrichment-slim:latest
-            with:
-              args: --path ${WORK_DIR:-.}
-    iac-misconfiguration-detection:
-      jobs:
-        iac-misconfig-detection-cloudformation:
-          steps:
-          - name: Run KICS (cloudformation)
-            with:
-              args: scan -t CloudFormation -p ${WORK_DIR:-.} -o $REPORT_FILE -f json
-                --config /cloudformation-config.yaml --disable-secrets
-        iac-misconfig-detection-pulumi:
-          steps:
-          - name: Run KICS (pulumi)
-            with:
-              args: scan -t Pulumi -p ${WORK_DIR:-.} -o $REPORT_FILE -f json --config
-                /pulumi-config.yaml --disable-secrets
-        iac-misconfig-detection-serverless:
-          steps:
-          - name: Run KICS (serverless)
-            with:
-              args: scan -t ServerlessFW -p ${WORK_DIR:-.} -o $REPORT_FILE -f json
-                --config /serverless-config.yaml --disable-secrets
-        iac-misconfiguration-detection-terraform:
-          steps:
-          - name: Run KICS (terraform)
-            with:
-              args: scan -t Terraform -p ${WORK_DIR:-.} -o $REPORT_FILE -f json --config
-                /terraform-config.yaml --disable-secrets
-    remediation-pr:
-      jobs:
-        remediation-pr:
-          steps:
-          - name: Run Jit Remediation
-            uses: registry.jit.io/open-remediation-pr-alpine:main
-            with:
-              args: --output-file "/opt/code/jit-report/results.json" --owner ${{
-                context.asset.owner }} --repo_name ${{ context.asset.asset_name }}
-                --action_id ${{ context.jit_event.action_id }} --finding_id ${{ context.jit_event.finding_id
-                }}
-              env:
-                FIX_SUGGESTION: ${{context.jit_event.fix_suggestion}}
-                GITHUB_TOKEN: ${{fromJSON(github.event.inputs.client_payload).payload.github_token}}
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
@@ -113,35 +57,4 @@ override:
             with:
               args: --json --config=/semgrep-ts-config.yml --metrics=off --severity=ERROR
                 ${WORK_DIR:-.}
-        static-code-analysis-python:
-          steps:
-          - name: Run Bandit
-            with:
-              args: -r ${WORK_DIR:-.} -f json -q -lll -iii
-        static-code-analysis-python-semgrep:
-          runner:
-            setup:
-              checkout: true
-              timeout_minutes: 15
-            type: github_actions
-          steps:
-          - name: Run semgrep python
-            with:
-              args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR
-                ${WORK_DIR:-.}
-    sca:
-      jobs:
-        software-component-analysis:
-          steps:
-          - name: Run osv-scanner
-            with:
-              args: --recursive ${WORK_DIR:-.}
-    secret-detection:
-      jobs:
-        secret-detection:
-          steps:
-          - name: Run Gitleaks
-            with:
-              args: detect --config $GITLEAKS_CONFIG_FILE_PATH --source ${WORK_DIR:-.}
-                -v --report-format json --report-path $REPORT_FILE --redact --no-git
-                --exit-code 0
+    
