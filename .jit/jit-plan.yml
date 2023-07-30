@@ -49,6 +49,13 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
+    enrichment-code:
+      jobs:
+        enrich:
+          steps:
+            - name: Run code enrichment
+              with:
+                args: --path ${WORK_DIR:-.}
     docker-scan:
       jobs:
         docker-scan:
@@ -89,14 +96,6 @@ override:
             - name: Run semgrep python
               with:
                 args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR ${WORK_DIR:-.}
-    enrichment-code:
-      jobs:
-        enrich:
-          steps:
-            - name: Run code enrichment # code controls execution enrichment for languages and frameworks detection
-              with:
-                args: --path ${WORK_DIR:-.}
-
     sca:
       jobs:
         software-component-analysis:
