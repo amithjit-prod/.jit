@@ -49,6 +49,15 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
+    enrichment-code:
+      jobs:
+        enrich:
+          default: true
+          steps:
+            - name: Run code enrichment # code controls execution enrichment for languages and frameworks detection
+              uses: registry.jit.io/control-enrichment-slim:latest
+              with:
+                args: --path ${WORK_DIR:-.}
     docker-scan:
       jobs:
         docker-scan:
