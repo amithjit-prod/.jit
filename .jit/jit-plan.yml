@@ -54,8 +54,8 @@ override:
         docker-scan:
           steps:
             - name: Run trivy
-                with:
-                  args: --quiet config --severity HIGH,CRITICAL -f json --ignorefile /opt/.trivyignore ${WORK_DIR:-.}
+              with:
+                args: --quiet config --severity HIGH,CRITICAL -f json --ignorefile /opt/.trivyignore ${WORK_DIR:-.}
     sast:
       jobs:
         static-code-analysis-python:
