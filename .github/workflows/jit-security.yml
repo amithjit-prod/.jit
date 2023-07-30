@@ -17,7 +17,7 @@ jobs:
         docker_user: jit-bot
         docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
         security_control: registry.jit.io/control-trivy-alpine:latest
-        security_control_args: --quiet config --severity HIGH,CRITICAL -f json --ignorefile /opt/.trivyignore \${WORK_DIR:-.}
+        security_control_args: --quiet config --severity HIGH,CRITICAL -f json --ignorefile /opt/.trivyignore ${WORK_DIR:-.}
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
@@ -49,7 +49,7 @@ jobs:
         docker_user: jit-bot
         docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
         security_control: registry.jit.io/control-kics-alpine:latest
-        security_control_args: scan -t CloudFormation -p \${WORK_DIR:-.} -o \$REPORT_FILE -f json --config \/cloudformation-config.yaml --disable-secrets
+        security_control_args: scan -t CloudFormation -p ${WORK_DIR:-.} -o $REPORT_FILE -f json --config /cloudformation-config.yaml --disable-secrets
         security_control_output_file: /code/jit-report/results.json
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
@@ -83,7 +83,7 @@ jobs:
         docker_user: jit-bot
         docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
         security_control: registry.jit.io/control-kics-alpine:latest
-        security_control_args: scan -t Pulumi -p \${WORK_DIR:-.} -o \$REPORT_FILE -f json --config \/pulumi-config.yaml --disable-secrets
+        security_control_args: scan -t Pulumi -p ${WORK_DIR:-.} -o $REPORT_FILE -f json --config /pulumi-config.yaml --disable-secrets
         security_control_output_file: /code/jit-report/results.json
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
@@ -139,23 +139,6 @@ jobs:
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
-  secret-detection:
-    if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'secret-detection' && fromJSON(github.event.inputs.client_payload).payload.workflow_slug == 'workflow-secret-detection'
-    runs-on: ubuntu-20.04
-    timeout-minutes: 20
-    steps:
-    - name: gitleaks
-      uses: jitsecurity-controls/jit-github-action@v2.6
-      with:
-        docker_user: jit-bot
-        docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
-        security_control: registry.jit.io/control-gitleaks-alpine:latest
-        security_control_args: detect --config \$GITLEAKS_CONFIG_FILE_PATH --source \${WORK_DIR:-.} -v --report-format json --report-path \$REPORT_FILE --redact --no-git --exit-code 0
-        security_control_output_file: /tmp/report.json
-        dispatch_type: workflow
-        context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
-        runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
-        
   software-component-analysis:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'software-component-analysis' && fromJSON(github.event.inputs.client_payload).payload.workflow_slug == 'workflow-sca'
     runs-on: ubuntu-20.04
@@ -167,7 +150,7 @@ jobs:
         docker_user: jit-bot
         docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
         security_control: registry.jit.io/control-osv-scanner-alpine:latest
-        security_control_args: --recursive \${WORK_DIR:-.}
+        security_control_args: --recursive ${WORK_DIR:-.}
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
@@ -264,7 +247,7 @@ jobs:
         docker_user: jit-bot
         docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
         security_control: registry.jit.io/control-semgrep-alpine:latest
-        security_control_args: --json --config=/semgrep-ts-config.yml --metrics=off --severity=ERROR \${WORK_DIR:-.}
+        security_control_args: --json --config=/semgrep-ts-config.yml --metrics=off --severity=ERROR ${WORK_DIR:-.}
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
@@ -296,7 +279,7 @@ jobs:
         docker_user: jit-bot
         docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
         security_control: registry.jit.io/control-semgrep-alpine:latest
-        security_control_args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR \${WORK_DIR:-.}
+        security_control_args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR ${WORK_DIR:-.}
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
