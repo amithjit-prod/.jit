@@ -56,6 +56,17 @@ override:
             - name: Run trivy
               with:
                 args: --quiet config --severity HIGH,CRITICAL -f json --ignorefile /opt/.trivyignore ${WORK_DIR:-.}
+    remediation-pr:
+      jobs:
+        remediation-pr:
+          steps:
+            - name: Run Jit Remediation
+              uses: registry.jit.io/open-remediation-pr-alpine:main
+              with:
+                args: --output-file "/opt/code/jit-report/results.json" --owner ${{ context.asset.owner }} --repo_name ${{ context.asset.asset_name }} --action_id ${{ context.jit_event.action_id }} --finding_id ${{ context.jit_event.finding_id }}
+                env:
+                  GITHUB_TOKEN: ${{fromJSON(github.event.inputs.client_payload).payload.github_token}}
+                  FIX_SUGGESTION: ${{context.jit_event.fix_suggestion}}
     sast:
       jobs:
         static-code-analysis-python:
