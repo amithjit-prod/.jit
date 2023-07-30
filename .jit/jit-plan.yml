@@ -55,7 +55,7 @@ override:
           steps:
             - name: Run code enrichment
               with:
-                args: --path ${WORK_DIR:-.}
+                args: --path \${WORK_DIR:-.}
     docker-scan:
       jobs:
         docker-scan:
