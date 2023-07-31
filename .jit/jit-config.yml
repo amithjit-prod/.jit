@@ -1,10 +1,8 @@
 applications:
 - api_domain: api.staging.jit.io
-  application_name: aaa
-  auth_header_name: sads
+  application_name: zap-stg
   authentication_key: Authorization
   authentication_mode: header-bearer
-  authentication_value: ${{ jit_secrets.api_scan_authentication_value }}
   exclude_paths: []
   target_url: https://meshi-bucket.s3.amazonaws.com/openapi.json
   type: api
