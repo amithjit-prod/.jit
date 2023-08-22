@@ -106,6 +106,17 @@ jobs:
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         inline_environment: -e GITHUB_TOKEN="${{fromJSON(github.event.inputs.client_payload).payload.github_token}}"
         
+  runtime-misconfig-detection-azure:
+    if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'runtime-misconfig-detection-azure' && fromJSON(github.event.inputs.client_payload).payload.workflow_slug == 'workflow-runtime-misconfiguration-detection-azure'
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+    - name: 
+      uses: jitsecurity-controls/jit-github-action@v4.0.1
+      with:
+        security_control: registry.jit.io/prowler:latest
+        runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
+        
   secret-detection:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'secret-detection' && fromJSON(github.event.inputs.client_payload).payload.workflow_slug == 'workflow-secret-detection'
     runs-on: ubuntu-20.04
