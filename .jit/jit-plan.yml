@@ -1,6 +1,6 @@
 name: My plan
 level: beginner
-update_id: 211c21e5-6f76-4220-a539-4949150b42d6
+update_id: 27f7bc52-2c0d-49bd-8559-14f0c3d9b2eb
 author: Jit
 version: 0.1
 owners:
@@ -39,12 +39,6 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
-    remediation-pr:
-      jobs:
-        remediation-pr:
-          steps:
-          - name: Run Jit Remediation
-            uses: registry.jit.io/open-remediation-pr-alpine:latest
     api-security:
       jobs:
         api-security-detection:
@@ -58,6 +52,12 @@ override:
             with:
               env:
                 AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
+    remediation-pr:
+      jobs:
+        remediation-pr:
+          steps:
+          - name: Run Jit Remediation
+            uses: registry.jit.io/open-remediation-pr-alpine:latest
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
