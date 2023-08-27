@@ -39,6 +39,12 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
+    remediation-pr:
+      jobs:
+        remediation-pr:
+          steps:
+          - name: Run Jit Remediation
+            uses: registry.jit.io/open-remediation-pr-alpine:not-hardened-main
     api-security:
       jobs:
         api-security-detection:
