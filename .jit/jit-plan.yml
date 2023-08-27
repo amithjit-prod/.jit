@@ -44,7 +44,7 @@ override:
         remediation-pr:
           steps:
           - name: Run Jit Remediation
-            uses: registry.jit.io/open-remediation-pr-alpine:not-hardened-main
+            uses: registry.jit.io/open-remediation-pr-alpine:fix-wf-params
     api-security:
       jobs:
         api-security-detection:
