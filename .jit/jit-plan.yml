@@ -41,17 +41,17 @@ override:
   workflows:
     api-security:
       jobs:
-        api-security-detection:
-          runner:
-            setup:
-              checkout: false
-            type: github_actions
+        # api-security-detection:
+        #   runner:
+        #     setup:
+        #       checkout: false
+        #     type: github_actions
           steps:
           - name: Run ZAP
             uses: registry.jit.io/zap:latest
             with:
               env:
-                AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
+                AUTHENTICATION_VALUE: ${{ jit_secrets.API_SCAN_AUTHENTICATION_VALUE }}
     remediation-pr:
       jobs:
         remediation-pr:
