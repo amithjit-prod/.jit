@@ -41,7 +41,7 @@ override:
   workflows:
     api-security:
       jobs:
-        # api-security-detection:
+        api-security-detection:
         #   runner:
         #     setup:
         #       checkout: false
