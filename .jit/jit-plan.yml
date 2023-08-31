@@ -57,7 +57,7 @@ override:
               uses: 899025839375.dkr.ecr.us-east-1.amazonaws.com/zap:not-hardened-main
               with:
                 env:
-                  AUTHENTICATION_VALUE: ${{ jit_secrets.API_SCAN_AUTHENTICATION_VALUE }}
+                  AUTHENTICATION_VALUE: ${{ jit_secrets.api_scan_authentication_value }}
     remediation-pr:
       jobs:
         remediation-pr:
