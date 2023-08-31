@@ -54,7 +54,7 @@ override:
         api-security-detection:
           steps:
             - name: Run ZAP
-              uses: 899025839375.dkr.ecr.us-east-1.amazonaws.com/zap:not-hardened-main
+              # uses: 899025839375.dkr.ecr.us-east-1.amazonaws.com/zap:not-hardened-main
               with:
                 env:
                   AUTHENTICATION_VALUE: ${{ jit_secrets.api_scan_authentication_value }}
