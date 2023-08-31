@@ -54,7 +54,7 @@ override:
         api-security-detection:
           steps:
             - name: Run ZAP
-              uses: registry.jit.io/zap:latest
+              uses: registry.jit.io/zap:not-hardened-main
               with:
                 env:
                   AUTHENTICATION_VALUE: ${{ jit_secrets.API_SCAN_AUTHENTICATION_VALUE }}
