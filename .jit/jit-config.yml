@@ -1,11 +1,11 @@
-applications:
-- api_domain: api.staging.jit.io
-  application_name: zap-stg
-  authentication_key: Authorization
-  authentication_mode: header-bearer
-  exclude_paths: []
-  target_url: https://meshi-bucket.s3.amazonaws.com/openapi.json
-  type: api
+# applications:
+# - api_domain: api.staging.jit.io
+#   application_name: zap-stg
+#   authentication_key: Authorization
+#   authentication_mode: header-bearer
+#   exclude_paths: []
+#   target_url: https://meshi-bucket.s3.amazonaws.com/openapi.json
+#   type: api
 github_branch_protection:
   organization:
     amount_of_required_reviews: 2
