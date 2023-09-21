@@ -81,10 +81,10 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 20
     steps:
-    - name: remediation-pr
+    - name: remediation-pr-alpine:not-hardened-sc-20631-jit-remediation-control-fix-sca
       uses: jitsecurity-controls/jit-github-action@v4.0.1
       with:
-        security_control: registry.jit.io/open-remediation-pr-alpine:latest
+        security_control: registry.jit.io/open-remediation-pr-alpine:not-hardened-sc-20631-jit-remediation-control-fix-sca-remediation
         security_control_output_file: /opt/code/jit-report/results.json
         
   secret-detection:
