@@ -1,6 +1,5 @@
 name: My plan
 level: beginner
-update_id: 1265cf38-c30b-4bc3-a22b-42fbfc31ef23
 author: Jit
 version: 0.1
 owners:
@@ -12,55 +11,67 @@ items:
   - name: Scan your API for vulnerabilities
     uses: jitsecurity-controls/jit-plans/items/runtime/item-api-security.yml@latest
   - name: Verify that Github Branch Protection is properly configured
-    uses: jitsecurity-controls/jit-plans/items/third_party_app/item-branch-protection-scm.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/third_party_app/item-branch-protection-scm.yml@latest
   - name: Scan your code for vulnerabilities (SAST)
-    uses: jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
   - name: Scan your Dockerfiles for vulnerabilities
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
   - name: Scan Kubernetes configuration files
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-iac-kubernetes.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-iac-kubernetes.yml@latest
   - name: Scan your infrastructure-as-code (IaC) for misconfigurations
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
   - name: Verify that the users of your AWS accounts have enabled MFA
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-mfa-cloud-providers.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-mfa-cloud-providers.yml@latest
   - name: Verify that MFA for your GitHub organization is enabled
-    uses: jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
   - name: Scan infrastructure for runtime misconfigurations
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (Azure)
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (GCP)
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
   - name: Scan code for hard-coded secrets
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
+  - name: Scan your code dependencies for vulnerabilities (SCA)
+    uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
 override:
   workflows:
     api-security:
       jobs:
         api-security-detection:
           steps:
-          - name: Run ZAP
-            with:
-              env:
-                AUTHENTICATION_VALUE: ${{ jit_secrets.api_scan_authentication_value
-                  }}
+            - name: Run ZAP
+              with:
+                env:
+                  AUTHENTICATION_VALUE: ${{ jit_secrets.api_scan_authentication_value }}
     remediation-pr:
       jobs:
         remediation-pr:
           steps:
-          - name: Run Jit Remediation
-            uses: registry.jit.io/open-remediation-pr-alpine:latest
+            - name: Run Jit Remediation
+              uses: registry.jit.io/open-remediation-pr-alpine:latest
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
           steps:
-          - name: Run Prowler For Azure
-            uses: registry.jit.io/prowler:latest
+            - name: Run Prowler For Azure
+              uses: registry.jit.io/prowler:latest
     sast:
       jobs:
         static-code-analysis-js:
           steps:
-          - name: Run semgrep javascript and typescript
-            with:
-              args: --json --config=/semgrep-ts-config.yml --metrics=off --severity=ERROR
-                ${WORK_DIR:-.}
+            - name: Run semgrep javascript and typescript
+              with:
+                args: >-
+                  --json --config=/semgrep-ts-config.yml --metrics=off
+                  --severity=ERROR ${WORK_DIR:-.}
