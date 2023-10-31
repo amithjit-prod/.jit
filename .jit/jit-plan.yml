@@ -48,7 +48,7 @@ items:
       jitsecurity-controls/jit-plans/items/aws_root_account/item-root-account-exception.yml@latest
 override:
   workflows:
-    runtime-misconfiguration-detection-iam-no-strong-policy:
+    runtime-misconfiguration-detection-root-account-exception:
       jobs:
         runtime-misconfig-detection-aws:
           runner:
