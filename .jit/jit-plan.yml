@@ -58,16 +58,16 @@ override:
           steps:
             - name: Run Prowler For AWS
               uses: registry.jit.io/prowler:not-hardened-sc-21370-prowler-pass-the-aws-account-id-and-use-it
-    runtime-misconfiguration-detection:
-      jobs:
-        runtime-misconfig-detection-aws:
-          runner:
-            type: github_actions
-            setup:
-              auth_type: aws_iam_role
-          steps:
-            - name: Run Prowler For AWS
-              uses: registry.jit.io/prowler:not-hardened-sc-21370-prowler-pass-the-aws-account-id-and-use-it
+    # runtime-misconfiguration-detection:
+    #   jobs:
+    #     runtime-misconfig-detection-aws:
+    #       runner:
+    #         type: github_actions
+    #         setup:
+    #           auth_type: aws_iam_role
+    #       steps:
+    #         - name: Run Prowler For AWS
+    #           uses: registry.jit.io/prowler:not-hardened-sc-21370-prowler-pass-the-aws-account-id-and-use-it
     api-security:
       jobs:
         api-security-detection:
