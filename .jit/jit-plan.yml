@@ -77,11 +77,6 @@ override:
           steps:
             - name: Run MFA checker
               uses: 899025839375.dkr.ecr.us-east-1.amazonaws.com/aws-mfa:not-hardened-main
-              with:
-                env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.GENERIC_RUNNER_TEST_AWS_ACCESS_KEY_ID }}
-                  AWS_REGION_NAME: us-east-1
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.GENERIC_RUNNER_TEST_AWS_SECRET_ACCESS_KEY }}
     runtime-misconfiguration-detection-root-account-exception:
       jobs:
         runtime-misconfig-detection-aws:
