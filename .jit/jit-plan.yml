@@ -64,13 +64,20 @@ override:
           steps:
             - name: Run Prowler For Azure
               uses: registry.jit.io/prowler:latest
+    runtime-misconfiguration-detection:
+      jobs:
+        runtime-misconfig-detection-aws:
+          steps:
+            - name: Run Prowler For AWS
+              uses: >-
+                899025839375.dkr.ecr.us-east-1.amazonaws.com/prowler:not-hardened-main
     runtime-misconfiguration-detection-root-account-exception:
       jobs:
-        # runtime-misconfig-detection-aws:
-        #   runner:
-        #     setup:
-        #       auth_type: aws_iam_role
-        #     type: github_actions
+        runtime-misconfig-detection-aws:
+          runner:
+            setup:
+              auth_type: aws_iam_role
+            type: github_actions
           steps:
             - name: Run Prowler For AWS
               uses: >-
