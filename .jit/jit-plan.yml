@@ -16,6 +16,9 @@ items:
   - name: Import AWS Security Hub Findings
     uses: >-
       jitsecurity-controls/jit-plans/items/infrastructure/item-cloud-security-posture-management.yml@latest
+  - name: Scan your code for vulnerabilities (SAST)
+    uses: >-
+      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
   - name: Scan your Dockerfiles for vulnerabilities
     uses: >-
       jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
@@ -47,9 +50,9 @@ items:
       jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
   - name: Scan code for hard-coded secrets
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
-  - name: Scan your code for vulnerabilities (SAST)
+  - name: Generate a Software Bill of Materials (SBOM)
     uses: >-
-      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
+      jitsecurity-controls/jit-plans/items/code/item-software-bill-of-materials.yml@latest
 override:
   workflows:
     api-security:
