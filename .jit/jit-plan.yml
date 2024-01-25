@@ -29,9 +29,9 @@ items:
     uses: jitsecurity-controls/jit-plans/items/infrastructure/item-mfa-cloud-providers.yml@latest
   - name: Verify that MFA for your GitHub organization is enabled
     uses: jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
-  - name: Use root user only by exception
+  # - name: Use root user only by exception
 
-    uses: jitsecurity-controls/jit-plans/items/aws_root_account/item-root-account-exception.yml@latest
+  #   uses: jitsecurity-controls/jit-plans/items/aws_root_account/item-root-account-exception.yml@latest
   - name: Scan infrastructure for runtime misconfigurations
     uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (Azure)
