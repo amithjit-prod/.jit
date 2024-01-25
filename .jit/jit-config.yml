@@ -11,6 +11,11 @@ github_branch_protection:
     amount_of_required_reviews: 2
     required_status_checks: []
 resource_management:
+  runner_config:
+    job_setup_timeout_minutes: 15
+    job_execution_timeout_minutes: 40
+    pr_job_setup_timeout_minutes: 15
+    pr_job_execution_timeout_minutes: 30
   exclude:
     plan_items:
       item-secret-detection:
